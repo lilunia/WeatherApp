@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyWeatherApp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="weather-panel">
+            <h1 class="weather-panel-appname">Weather App</h1>
+            <div class="weather-panel-search"><input class="weather-panel-search-input" type="text" placeholder="Enter the city name"><button class="weather-panel-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button></div>
+            <p class="error"></p>
+            <h3 class="weather-panel-city"></h3>
+            <p class="weather-panel-temperature"><p/>
+            <div class="weather-panel-img"><img class="weather-panel-img-pic" src="./img/unknown.png" alt="picture describing weather"></div>
+        </div>
+        <div class="weather-adds">
+            <div class="weather-adds-box">
+                <p class="weather-adds-heading">Weather</p>
+                <p class="weather-adds-weather"></p>
+            </div>
+            <div class="weather-adds-box">
+                <p class="weather-adds-heading">Humidity</p>
+                <p class="weather-adds-humidity"></p>
+            </div>
+            <div class="weather-adds-box">
+                <p class="weather-adds-heading">Wind</p>
+                <p class="weather-adds-wind"></p>
+            </div>
+            <div class="weather-adds-box">
+                <p class="weather-adds-heading">Pressure</p>
+                <p class="weather-adds-pressure"></p>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="./main.js"></script>
+
+</body>
+
+</html>
