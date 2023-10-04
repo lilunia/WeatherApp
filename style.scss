@@ -1,3 +1,11 @@
+:root {
+	--background-color: #f6f2e9;
+	--app-color: #f4e9cd;
+	--main-color: #000;
+	--box-shadow: #808080;
+	--error-color: #593333;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -14,46 +22,99 @@ body {
 	width: 100%;
 	height: 100vh;
 	font-family: 'Barlow', sans-serif;
-	background-color: #f6f2e9;
+	background-color: var(--background-color);
 	// background-color: #0b1b24e7;
 }
-
+.light-icon,
+.dark-icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 0.25em;
+	height: 0.8em;
+	width: 0.8em;
+}
 .wrapper {
 	display: flex;
 	// justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	margin: auto 1em;
+	margin: 1em;
 	padding: 1em;
 	width: 100%;
 	max-width: 400px;
 	min-height: 560px;
 	max-height: 700px;
 	font-size: 3rem;
-	color: white;
-	color: #000;
+	// color: #fff;
+	color: var(--main-color);
 	// background-color: #031926;
-	background-color: #f4e9cd;
+	background-color: var(--app-color);
 
 	// border: .05em solid white;
 	border-radius: 0.5em;
-	box-shadow: 0 0 0.5em grey;
+	box-shadow: 0 0 0.5em var(--box-shadow);
 }
 .error {
 	margin-bottom: 1em;
-	color: #593333;
+	color: var(--error-color);
 }
 .weather-panel {
 	display: flex;
-	// justify-content: center;
+	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	margin: 0 1em;
+	width: 100%;
 	font-size: 1.5rem;
 
-	&-appname {
-		font-size: 1.5rem;
-		margin-bottom: 2em;
+	&-main {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-direction: row;
+		// margin-bottom: 2em;
+		width: 100%;
+		height: 100%;
+
+		&-appname {
+			display: flex;
+			justify-content: center;
+			// width: 50%;
+			font-size: 1.5rem;
+		}
+		&-toggle {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding-left: 1em;
+			// width: 50%;
+
+			&-btn {
+				position: relative;
+				padding: 0.1em 2em;
+				width: 1em;
+				height: 1.5em;
+				background: none;
+				border: none;
+				border: 0.1em solid var(--main-color);
+				border-radius: 1em;
+				cursor: pointer;
+
+				&-circle {
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-150%, -50%);
+					margin: 0;
+					padding: 0.5em;
+					width: 1em;
+					height: 1em;
+					border-radius: 50%;
+					background-color: var(--main-color);
+					transition: left 0.3s;
+				}
+			}
+		}
 	}
 	&-search {
 		display: flex;
@@ -65,8 +126,8 @@ body {
 
 		&-input {
 			width: 70%;
-			color: white;
-			color: #000;
+			// color: #fff;
+			color: var(--main-color);
 			font-size: 1.4rem;
 			background: none;
 			border: none;
@@ -76,9 +137,10 @@ body {
 	&-btn {
 		border: none;
 		background: none;
-		color: white;
-		color: #000;
+		// color: #fff;
+		color: var(--main-color);
 		cursor: pointer;
+		padding: 1em;
 	}
 	&-city {
 		font-size: 1.5rem;
@@ -91,11 +153,36 @@ body {
 		margin-bottom: 0.1em;
 	}
 	&-img {
-		margin: 1em 1em 4em;
+		margin: 1em 1em 3em;
 
 		img {
 			height: 6em;
 		}
+	}
+}
+.active {
+	transition: left 0.3s;
+	animation: toggleAnimDark 0.3s forwards;
+}
+.non-active {
+	transition: left 0.3s;
+	animation: toggleAnimLight 0.3s forwards;
+}
+
+@keyframes toggleAnimDark {
+	from {
+		left: 50%;
+	}
+	to {
+		left: 100%;
+	}
+}
+@keyframes toggleAnimLight {
+	from {
+		left: 100%;
+	}
+	to {
+		left: 50%;
 	}
 }
 .weather-adds {
@@ -121,8 +208,10 @@ body {
 @media (min-width: 481px) {
 	.weather-panel {
 		font-size: 2rem;
-        &-appname {
-			font-size: 1.8rem;
+		&-main {
+			&-appname {
+				font-size: 1.8rem;
+			}
 		}
 		&-city {
 			font-size: 2.5rem;
@@ -136,23 +225,20 @@ body {
 				font-size: 1.6rem;
 			}
 		}
-        &-img {
-            margin: 1em;
-    
-            img {
-                height: 8em;
-            }
-        }
-        
+		&-img {
+			margin: 1em;
 
+			img {
+				height: 8em;
+			}
+		}
 	}
-    .weather-adds {
-        &-heading {
-            font-size: 1.6rem;
-        }
-        &-box {
-            margin-bottom: 0.5em;
-        }
-    }
-   
+	.weather-adds {
+		&-heading {
+			font-size: 1.6rem;
+		}
+		&-box {
+			margin-bottom: 0.5em;
+		}
+	}
 }

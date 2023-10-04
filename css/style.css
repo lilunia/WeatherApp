@@ -1,3 +1,11 @@
+:root {
+  --background-color: #f6f2e9;
+  --app-color: #f4e9cd;
+  --main-color: #000;
+  --box-shadow: #808080;
+  --error-color: #593333;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -15,42 +23,91 @@ body {
   width: 100%;
   height: 100vh;
   font-family: "Barlow", sans-serif;
-  background-color: #f6f2e9;
+  background-color: var(--background-color);
+}
+
+.light-icon,
+.dark-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0.25em;
+  height: 0.8em;
+  width: 0.8em;
 }
 
 .wrapper {
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: auto 1em;
+  margin: 1em;
   padding: 1em;
   width: 100%;
   max-width: 400px;
   min-height: 560px;
   max-height: 700px;
   font-size: 3rem;
-  color: white;
-  color: #000;
-  background-color: #f4e9cd;
+  color: var(--main-color);
+  background-color: var(--app-color);
   border-radius: 0.5em;
-  box-shadow: 0 0 0.5em grey;
+  box-shadow: 0 0 0.5em var(--box-shadow);
 }
 
 .error {
   margin-bottom: 1em;
-  color: #593333;
+  color: var(--error-color);
 }
 
 .weather-panel {
   display: flex;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 0 1em;
+  width: 100%;
   font-size: 1.5rem;
 }
-.weather-panel-appname {
+.weather-panel-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+.weather-panel-main-appname {
+  display: flex;
+  justify-content: center;
   font-size: 1.5rem;
-  margin-bottom: 2em;
+}
+.weather-panel-main-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 1em;
+}
+.weather-panel-main-toggle-btn {
+  position: relative;
+  padding: 0.1em 2em;
+  width: 1em;
+  height: 1.5em;
+  background: none;
+  border: none;
+  border: 0.1em solid var(--main-color);
+  border-radius: 1em;
+  cursor: pointer;
+}
+.weather-panel-main-toggle-btn-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-150%, -50%);
+  margin: 0;
+  padding: 0.5em;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  background-color: var(--main-color);
+  transition: left 0.3s;
 }
 .weather-panel-search {
   display: flex;
@@ -62,8 +119,7 @@ body {
 }
 .weather-panel-search-input {
   width: 70%;
-  color: white;
-  color: #000;
+  color: var(--main-color);
   font-size: 1.4rem;
   background: none;
   border: none;
@@ -71,9 +127,9 @@ body {
 .weather-panel-btn {
   border: none;
   background: none;
-  color: white;
-  color: #000;
+  color: var(--main-color);
   cursor: pointer;
+  padding: 1em;
 }
 .weather-panel-city {
   font-size: 1.5rem;
@@ -84,12 +140,38 @@ body {
   margin-bottom: 0.1em;
 }
 .weather-panel-img {
-  margin: 1em 1em 4em;
+  margin: 1em 1em 3em;
 }
 .weather-panel-img img {
   height: 6em;
 }
 
+.active {
+  transition: left 0.3s;
+  animation: toggleAnimDark 0.3s forwards;
+}
+
+.non-active {
+  transition: left 0.3s;
+  animation: toggleAnimLight 0.3s forwards;
+}
+
+@keyframes toggleAnimDark {
+  from {
+    left: 50%;
+  }
+  to {
+    left: 100%;
+  }
+}
+@keyframes toggleAnimLight {
+  from {
+    left: 100%;
+  }
+  to {
+    left: 50%;
+  }
+}
 .weather-adds {
   display: flex;
   justify-content: center;
@@ -114,7 +196,7 @@ body {
   .weather-panel {
     font-size: 2rem;
   }
-  .weather-panel-appname {
+  .weather-panel-main-appname {
     font-size: 1.8rem;
   }
   .weather-panel-city {

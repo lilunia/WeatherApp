@@ -9,6 +9,10 @@ const humidity = document.querySelector('.weather-adds-humidity')
 const wind = document.querySelector('.weather-adds-wind')
 const pressure = document.querySelector('.weather-adds-pressure')
 
+const toggleBtn = document.querySelector('.weather-panel-main-toggle-btn-circle')
+const toggleSlider = document.querySelector('.weather-panel-main-toggle-btn')
+let root = document.documentElement
+
 const API_LINK = 'https://api.openweathermap.org/data/2.5/weather?q='
 const API_KEY = '&appid=4cc99631ba4cc9ac44c94bfa9d16e0f7'
 const API_UNITS = '&units=metric'
@@ -79,5 +83,34 @@ const checkEnter = e => {
 	}
 }
 
+const checkActive = () => {
+	if (toggleBtn.classList.contains('active') || toggleBtn.classList.contains('non-active')) {
+		toggleBtn.classList.toggle('non-active')
+		toggleBtn.classList.toggle('active')
+	} else {
+		toggleBtn.classList.add('active')
+	}
+}
+const toggleAction = () => {
+	if (toggleBtn.classList.contains('active')) {
+		root.style.setProperty('--background-color', '#0b1b24e7')
+		root.style.setProperty('--app-color', '#031926')
+		root.style.setProperty('--main-color', '#fff')
+		root.style.setProperty('--box-shadow', '#000')
+		root.style.setProperty('--error-color', '#9dbebb')
+	} else if (toggleBtn.classList.contains('non-active')) {
+		root.style.setProperty('--background-color', '#f6f2e9')
+		root.style.setProperty('--app-color', '#f4e9cd')
+		root.style.setProperty('--main-color', '#000')
+		root.style.setProperty('--box-shadow', '#808080')
+		root.style.setProperty('--error-color', '#593333')
+	}
+}
+
 searchBtn.addEventListener('click', getWeather)
 input.addEventListener('keyup', checkEnter)
+
+toggleSlider.addEventListener('click', () => {
+	checkActive()
+	toggleAction()
+})
