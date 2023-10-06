@@ -5,12 +5,12 @@ const cityName = document.querySelector('.weather-panel-city')
 const error = document.querySelector('.error')
 const temperature = document.querySelector('.weather-panel-temperature')
 const img = document.querySelector('.weather-panel-img-pic')
-const sunriseInfo = document.querySelector('.weather-panel-sun-rise-info')
-const sunsetInfo = document.querySelector('.weather-panel-sun-set-info')
-const weather = document.querySelector('.weather-adds-weather')
-const humidity = document.querySelector('.weather-adds-humidity')
-const wind = document.querySelector('.weather-adds-wind')
-const pressure = document.querySelector('.weather-adds-pressure')
+const sunriseInfo = document.querySelector('.weather-panel-sun-rise')
+const sunsetInfo = document.querySelector('.weather-panel-sun-set')
+const weather = document.querySelector('.weather-add-box-weather')
+const humidity = document.querySelector('.weather-add-box-humidity')
+const wind = document.querySelector('.weather-add-box-wind')
+const pressure = document.querySelector('.weather-add-box-pressure')
 
 const toggleBtn = document.querySelector('.weather-panel-main-toggle-btn-circle')
 const toggleSlider = document.querySelector('.weather-panel-main-toggle-btn')
@@ -54,10 +54,18 @@ const getWeather = () => {
 
 			cityName.textContent = res.name
 			temperature.textContent = Math.floor(temp) + '°C'
-			weather.textContent = wea
-			humidity.textContent = hum + '%'
-			wind.textContent = Math.floor(speed) + 'm/s'
-			pressure.textContent = press + 'hPa'
+
+			weather.innerHTML = `<p class="weather-add-heading">Weather</p>
+			<p class="weather-add-weather">${wea}</p>`
+
+			humidity.innerHTML = `<p class="weather-add-heading">Humidity</p>
+			<p class="weather-add-humidity">${hum}%</p>`
+
+			wind.innerHTML = ` <p class="weather-add-heading">Wind</p>
+			<p class="weather-add-wind">${Math.floor(speed)}m/s</p>`
+
+			pressure.innerHTML = `<p class="weather-add-heading">Pressure</p>
+			<p class="weather-add-pressure">${press}hPa</p>`
 
 			input.value = ''
 			error.textContent = ''
@@ -136,8 +144,6 @@ const checkStatus = (info, id) => {
 }
 
 const setTime = () => {
-	//timezone do dodania
-
 	const time = new Date()
 
 	timeZoneUser = time.getTimezoneOffset() * 60
@@ -190,8 +196,33 @@ const sunInfo = (rise, set) => {
 	const minutesSet = dateSet.getMinutes()
 	const minCheckSet = minutesSet < 10 ? `0${minutesSet}` : `${minutesSet}`
 
-	sunriseInfo.textContent = `${hrCheck}:${minCheckRise}${ampmRise}`
-	sunsetInfo.textContent = `${hrCheckSet}:${minCheckSet}${ampmSet}`
+	sunriseInfo.innerHTML = `<span class="weather-panel-sun-rise-icon"><svg
+		xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+		stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+		class="feather feather-sunrise">
+		<path d="M17 18a5 5 0 0 0-10 0"></path>
+		<line x1="12" y1="2" x2="12" y2="9"></line>
+		<line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
+		<line x1="1" y1="18" x2="3" y2="18"></line>
+		<line x1="21" y1="18" x2="23" y2="18"></line>
+		<line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
+		<line x1="23" y1="22" x2="1" y2="22"></line>
+		<polyline points="8 6 12 2 16 6"></polyline>
+		</svg></span><span class="weather-panel-sun-rise-info">${hrCheck}:${minCheckRise}${ampmRise}</span>`
+
+	sunsetInfo.innerHTML = `<span class="weather-panel-sun-set-icon"><svg
+		xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+		stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+		class="feather feather-sunset">
+		<path d="M17 18a5 5 0 0 0-10 0"></path>
+		<line x1="12" y1="9" x2="12" y2="2"></line>
+		<line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
+		<line x1="1" y1="18" x2="3" y2="18"></line>
+		<line x1="21" y1="18" x2="23" y2="18"></line>
+		<line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
+		<line x1="23" y1="22" x2="1" y2="22"></line>
+		<polyline points="16 5 12 9 8 5"></polyline>
+		</svg></span><span class="weather-panel-sun-set-info">${hrCheckSet}:${minCheckSet}${ampmSet}</span>`
 }
 
 const checkSunMoment = (timeCity, sunrise, sunset) => {

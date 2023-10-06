@@ -209,7 +209,7 @@ body {
     left: 50%;
   }
 }
-.weather-adds {
+.weather-add {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -217,7 +217,7 @@ body {
   width: 100%;
   font-size: 2rem;
 }
-.weather-adds-box {
+.weather-add-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -225,7 +225,7 @@ body {
   height: 1em;
   margin-bottom: 0.2em;
 }
-.weather-adds-heading {
+.weather-add-heading {
   font-size: 1.2rem;
 }
 
@@ -274,10 +274,10 @@ body {
   .weather-panel-img-pic {
     height: 8em;
   }
-  .weather-adds-heading {
+  .weather-add-heading {
     font-size: 1.6rem;
   }
-  .weather-adds-box {
+  .weather-add-box {
     margin-bottom: 0.5em;
   }
 }/*# sourceMappingURL=style.css.map */
