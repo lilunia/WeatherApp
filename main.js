@@ -16,12 +16,6 @@ const toggleBtn = document.querySelector('.weather-panel-main-toggle-btn-circle'
 const toggleSlider = document.querySelector('.weather-panel-main-toggle-btn')
 let root = document.documentElement
 
-let hourCurrent
-let minCurrent
-let hourOfRise
-let minOfRise
-let hourOfSet
-let minOfSet
 let timeZoneCity
 let timeZoneUser
 let timeDifference
@@ -172,9 +166,6 @@ const setTime = () => {
 	}
 
 	dateInfo.textContent = `${curMonth} ${currDay}, ${hrCheck}:${minCheck}${ampmCheck}`
-
-	hourCurrent = hrCheck
-	minCurrent = minCheck
 }
 
 const sunInfo = (rise, set) => {
@@ -198,21 +189,9 @@ const sunInfo = (rise, set) => {
 	const ampmSet = hoursLocalSet >= 12 ? 'pm' : 'am'
 	const minutesSet = dateSet.getMinutes()
 	const minCheckSet = minutesSet < 10 ? `0${minutesSet}` : `${minutesSet}`
-	console.log(hourRise)
-	console.log(timeDifference)
-	console.log(hourSet)
-
-	console.log(`hoursLocalRise: ${hoursLocalRise} hoursLocalSet : ${hoursLocalSet} `)
 
 	sunriseInfo.textContent = `${hrCheck}:${minCheckRise}${ampmRise}`
 	sunsetInfo.textContent = `${hrCheckSet}:${minCheckSet}${ampmSet}`
-	console.log(`sun rise ${hrCheck}:${minCheckRise}${ampmRise}`)
-	console.log(`sun set ${hrCheckSet}:${minCheckSet}${ampmSet}`)
-
-	// hourOfRise = localRiseHr
-	// minOfRise = minRise
-	// hourOfSet = localSetHr
-	// minOfSet = minSet
 }
 
 const checkSunMoment = (timeCity, sunrise, sunset) => {

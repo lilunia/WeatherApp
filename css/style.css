@@ -151,7 +151,7 @@ body {
 .weather-panel-img {
   margin: 1em;
 }
-.weather-panel-img img {
+.weather-panel-img-pic {
   height: 6em;
 }
 .weather-panel-sun {
@@ -271,7 +271,7 @@ body {
   .weather-panel-search-input {
     font-size: 1.6rem;
   }
-  .weather-panel-img img {
+  .weather-panel-img-pic {
     height: 8em;
   }
   .weather-adds-heading {
