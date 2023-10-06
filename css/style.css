@@ -20,6 +20,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   width: 100%;
   height: 100vh;
   font-family: "Barlow", sans-serif;
@@ -27,7 +28,9 @@ body {
 }
 
 .light-icon,
-.dark-icon {
+.dark-icon,
+.weather-panel-sun-rise-icon,
+.weather-panel-sun-set-icon {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,13 +41,15 @@ body {
 
 .wrapper {
   display: flex;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 1em;
+  margin: 0.5em;
+  margin-top: 2em;
   padding: 1em;
-  width: 100%;
+  width: 90%;
   max-width: 400px;
-  min-height: 560px;
+  min-height: 540px;
   max-height: 700px;
   font-size: 3rem;
   color: var(--main-color);
@@ -131,8 +136,12 @@ body {
   cursor: pointer;
   padding: 1em;
 }
-.weather-panel-city {
+.weather-panel-dateTime {
   font-size: 1.5rem;
+  margin-bottom: 0.5em;
+}
+.weather-panel-city {
+  font-size: 2rem;
   margin-bottom: 0.5em;
 }
 .weather-panel-temperature {
@@ -140,10 +149,38 @@ body {
   margin-bottom: 0.1em;
 }
 .weather-panel-img {
-  margin: 1em 1em 3em;
+  margin: 1em;
 }
 .weather-panel-img img {
   height: 6em;
+}
+.weather-panel-sun {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+  font-size: 1.5rem;
+  width: 100%;
+  height: 100%;
+}
+.weather-panel-sun-rise {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1em;
+}
+.weather-panel-sun-rise-icon {
+  margin-right: 0.5em;
+}
+.weather-panel-sun-set {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-left: 1em;
+}
+.weather-panel-sun-set-icon {
+  margin-right: 0.5em;
 }
 
 .active {
@@ -192,7 +229,32 @@ body {
   font-size: 1.2rem;
 }
 
-@media (min-width: 481px) {
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: auto;
+  padding: 1em;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5em;
+  font-size: 1.2rem;
+  color: var(--main-color);
+  background-color: var(--app-color);
+}
+.footer a {
+  color: var(--main-color);
+}
+.footer p {
+  margin-bottom: 0.5em;
+}
+
+@media (min-width: 481px) and (min-height: 768px) {
+  .wrapper {
+    margin-top: auto;
+  }
   .weather-panel {
     font-size: 2rem;
   }
@@ -208,9 +270,6 @@ body {
   }
   .weather-panel-search-input {
     font-size: 1.6rem;
-  }
-  .weather-panel-img {
-    margin: 1em;
   }
   .weather-panel-img img {
     height: 8em;
