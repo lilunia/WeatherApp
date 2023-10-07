@@ -7,6 +7,10 @@ const temperature = document.querySelector('.weather-panel-temperature')
 const img = document.querySelector('.weather-panel-img-pic')
 const sunriseInfo = document.querySelector('.weather-panel-sun-rise')
 const sunsetInfo = document.querySelector('.weather-panel-sun-set')
+const forecastPanel = document.querySelector('.weather-panel-forecast')
+
+const forecastImg = document.getElementsByClassName('weather-panel-forecast-info-img-pic')
+
 const weather = document.querySelector('.weather-add-box-weather')
 const humidity = document.querySelector('.weather-add-box-humidity')
 const wind = document.querySelector('.weather-add-box-wind')
@@ -19,11 +23,20 @@ let root = document.documentElement
 let timeZoneCity
 let timeZoneUser
 let timeDifference
-let moment
+let sunrise
+let sunset
+let momentCurrent
+let momentWeather
+let pathImg
+let momentForecast
+let forecastTime
+let forecastPanelHour
 
 const API_LINK = 'https://api.openweathermap.org/data/2.5/weather?q='
 const API_KEY = '&appid=4cc99631ba4cc9ac44c94bfa9d16e0f7'
 const API_UNITS = '&units=metric'
+
+const API_FORECAST = 'https://api.openweathermap.org/data/2.5/forecast?q='
 
 const getWeather = () => {
 	const city = input.value || 'Warsaw'
@@ -45,12 +58,10 @@ const getWeather = () => {
 			const speed = res.wind.speed
 			const info = Object.assign({}, ...res.weather)
 			const wea = info.description
-
-			timeZoneCity = res.timezone
-			console.log(`time zone city is ${timeZoneCity}`)
 			const timeCity = res.dt
-			const sunrise = res.sys.sunrise
-			const sunset = res.sys.sunset
+			timeZoneCity = res.timezone
+			sunrise = res.sys.sunrise
+			sunset = res.sys.sunset
 
 			cityName.textContent = res.name
 			temperature.textContent = Math.floor(temp) + '°C'
@@ -67,79 +78,148 @@ const getWeather = () => {
 			pressure.innerHTML = `<p class="weather-add-heading">Pressure</p>
 			<p class="weather-add-pressure">${press}hPa</p>`
 
-			input.value = ''
-			error.textContent = ''
-			dateInfo.textContent = ''
-
 			checkSunMoment(timeCity, sunrise, sunset)
-			checkStatus(info.description, info.id)
+			momentWeather = momentCurrent
+			checkStatus(info.description, info.id, momentWeather)
+			img.setAttribute('src', `${pathImg}`)
 			setTime()
 			setInterval(setTime, 1000)
 			sunInfo(sunrise, sunset)
+
+			input.value = ''
+			error.textContent = ''
+			dateInfo.textContent = ''
 		})
 		.catch(() => {
 			error => console.error(error)
 			error.textContent = 'Enter a correct name'
 		})
 }
+const getForecast = () => {
+	const city = input.value || 'Warsaw'
+	const URL = API_FORECAST + city + API_KEY + API_UNITS
 
-const checkStatus = (info, id) => {
+	fetch(URL)
+		.then(res => {
+			if (res.ok) {
+				return res.json()
+			} else {
+				reject(`error data`)
+			}
+		})
+		.then(res => {
+			console.log(res)
+			forecastPanel.innerHTML = ''
+			const weatherArr = new Array()
+			const info3h = Object.assign({}, res.list[0])
+			const info6h = Object.assign({}, res.list[1])
+			const info9h = Object.assign({}, res.list[2])
+			const info12h = Object.assign({}, res.list[3])
+			const info15h = Object.assign({}, res.list[4])
+
+			let weaForecast
+			let weaInfo
+			let weaId
+			let tempForecast
+
+			weatherArr.push(info3h, info6h, info9h, info12h, info15h)
+
+			weatherArr.forEach(el => {
+				tempForecast = Math.floor(el.main.temp)
+				weaForecast = Object.assign({}, ...el.weather)
+				weaInfo = weaForecast.description
+				weaId = weaForecast.id
+				setTimeForecast(el.dt)
+
+				checkSunMoment(el.dt, sunrise, sunset)
+				momentForecast = momentCurrent
+				checkStatus(weaInfo, weaId, momentForecast)
+
+				forecastPanelHour = document.createElement('div')
+				forecastPanelHour.classList.add('weather-panel-forecast-info')
+				forecastPanelHour.innerHTML = `
+				<p class="weather-panel-forecast-info-hour">${forecastTime}</p>
+                    <p class="weather-panel-forecast-info-temp">${tempForecast}°C</p>
+                    <div class="weather-panel-forecast-info-img"><img class="weather-panel-forecast-info-img-pic"
+                            src=${pathImg} alt=""></div>
+				`
+				forecastPanel.append(forecastPanelHour)
+			})
+		})
+		.catch(() => {
+			error => console.error(error)
+			error.textContent = 'Enter a correct forecast name'
+		})
+}
+const setTimeForecast = dtime => {
+	const time = new Date(dtime * 1000)
+	const hourForecast = time.getHours()
+
+	const hourLocalForecast = Math.abs(hourForecast + timeDifference + 24) % 24
+	const hourAmpm = hourLocalForecast % 12 || 12
+	const hrCheck = hourAmpm < 10 ? `0${hourAmpm}` : `${hourAmpm}`
+	const ampmForecast = hourLocalForecast >= 12 ? 'pm' : 'am'
+
+	forecastTime = `${hrCheck}${ampmForecast}`
+}
+
+const checkStatus = (info, id, moment) => {
 	if (info === 'thunderstorm' || (id >= 200 && id < 300)) {
 		if (moment === 'day') {
-			img.setAttribute('src', './img/thunderstorm_d.png')
+			pathImg = './img/thunderstorm_d.png'
 		} else {
-			img.setAttribute('src', './img/thunderstorm_n.png')
+			pathImg = './img/thunderstorm_n.png'
 		}
 	} else if (info === 'rain' || (id >= 500 && id < 521)) {
 		if (moment === 'day') {
-			img.setAttribute('src', './img/rain_d.png')
+			pathImg = './img/rain_d.png'
 		} else {
-			img.setAttribute('src', './img/rain_n.png')
+			pathImg = './img/rain_n.png'
 		}
 	} else if (info === 'shower rain' || (id >= 521 && id < 600)) {
 		if (moment === 'day') {
-			img.setAttribute('src', './img/showerrain_d.png')
+			pathImg = './img/showerrain_d.png'
 		} else {
-			img.setAttribute('src', './img/showerrain_n.png')
+			pathImg = './img/showerrain_n.png'
 		}
 	} else if (info === 'snow' || (id >= 600 && id < 700)) {
 		if (moment === 'day') {
-			img.setAttribute('src', './img/snow_d.png')
+			pathImg = './img/snow_d.png'
 		} else {
-			img.setAttribute('src', './img/snow_n.png')
+			pathImg = './img/snow_n.png'
 		}
 	} else if (info === 'mist' || (id >= 700 && id < 800)) {
 		if (moment === 'day') {
-			img.setAttribute('src', './img/mist_d.png')
+			pathImg = './img/mist_d.png'
 		} else {
-			img.setAttribute('src', './img/mist_n.png')
+			pathImg = './img/mist_n.png'
 		}
 	} else if (info === 'clear sky' && id === 800) {
 		if (moment === 'day') {
-			img.setAttribute('src', './img/clearsky_d.png')
+			pathImg = './img/clearsky_d.png'
 		} else {
-			img.setAttribute('src', './img/clearsky_n.png')
+			pathImg = './img/clearsky_n.png'
 		}
 	} else if (info === 'few clouds' || id === 801) {
 		if (moment === 'day') {
-			img.setAttribute('src', './img/fewclouds_d.png')
+			pathImg = './img/fewclouds_d.png'
 		} else {
-			img.setAttribute('src', './img/fewclouds_n.png')
+			pathImg = './img/fewclouds_n.png'
 		}
 	} else if (info === 'scattered clouds' || id === 802) {
 		if (moment === 'day') {
-			img.setAttribute('src', './img/scatteredclouds_d.png')
+			pathImg = './img/scatteredclouds_d.png'
 		} else {
-			img.setAttribute('src', './img/scatteredclouds_n.png')
+			pathImg = './img/scatteredclouds_n.png'
 		}
 	} else if (info === 'broken clouds' || (id >= 803 && id < 900)) {
 		if (moment === 'day') {
-			img.setAttribute('src', './img/brokenclouds_d.png')
+			pathImg = './img/brokenclouds_d.png'
 		} else {
-			img.setAttribute('src', './img/brokenclouds_n.png')
+			pathImg = './img/brokenclouds_n.png'
 		}
 	} else {
-		img.setAttribute('src', './img/unknown.png')
+		pathImg = './img/unknown.png'
 	}
 }
 
@@ -226,17 +306,20 @@ const sunInfo = (rise, set) => {
 }
 
 const checkSunMoment = (timeCity, sunrise, sunset) => {
-	if (timeCity > sunrise && timeCity < sunset) {
-		console.log('Tutaj jest teraz dzień ')
-		moment = 'day'
+	if (
+		(timeCity > sunrise && timeCity < sunset) ||
+		(timeCity > sunrise + 86400 && timeCity < sunset + 86400) ||
+		(timeCity > sunrise - 86400 && timeCity < sunset - 86400)
+	) {
+		momentCurrent = 'day'
 	} else {
-		console.log('tutaj jest teraz noc')
-		moment = 'night'
+		momentCurrent = 'night'
 	}
 }
 
 const checkEnter = e => {
 	if (e.key === 'Enter') {
+		getForecast()
 		getWeather()
 	}
 }
@@ -265,7 +348,10 @@ const toggleAction = () => {
 	}
 }
 
-searchBtn.addEventListener('click', getWeather)
+searchBtn.addEventListener('click', () => {
+	getForecast()
+	getWeather()
+})
 input.addEventListener('keyup', checkEnter)
 
 toggleSlider.addEventListener('click', () => {

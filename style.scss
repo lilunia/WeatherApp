@@ -124,7 +124,7 @@ body {
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
-		margin-bottom: 1em;
+		margin-bottom: 0.5em;
 		padding-top: 1em;
 		width: 100%;
 
@@ -156,7 +156,7 @@ body {
 		margin-bottom: 0.5em;
 	}
 	&-temperature {
-		font-size: 5rem;
+		font-size: 3rem;
 		//font-size: 8rem;
 		margin-bottom: 0.1em;
 	}
@@ -164,7 +164,7 @@ body {
 		margin: 1em;
 
 		&-pic {
-			height: 6em;
+			height: 4em;
 		}
 	}
 	&-sun {
@@ -172,7 +172,7 @@ body {
 		justify-content: center;
 		align-items: center;
 		margin-bottom: 1em;
-		font-size: 1.5rem;
+		font-size: 1.3rem;
 		width: 100%;
 		height: 100%;
 
@@ -193,6 +193,32 @@ body {
 			margin-left: 1em;
 			&-icon {
 				margin-right: 0.5em;
+			}
+		}
+	}
+	&-forecast {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-bottom: 1em;
+		&-info {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			margin: 0 0.5em;
+			&-hour {
+				margin-bottom: 0.5em;
+				font-size: 0.7em;
+			}
+			&-temp {
+				margin-bottom: 0.5em;
+				font-size: 1em;
+			}
+			&-img {
+				&-pic {
+					height: 1.5em;
+				}
 			}
 		}
 	}
@@ -280,7 +306,7 @@ body {
 			margin-bottom: 1em;
 		}
 		&-temperature {
-			font-size: 7rem;
+			font-size: 4rem;
 		}
 		&-search {
 			&-input {
@@ -289,7 +315,7 @@ body {
 		}
 		&-img {
 			&-pic {
-				height: 8em;
+				height: 5em;
 			}
 		}
 	}

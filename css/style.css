@@ -118,7 +118,7 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
   padding-top: 1em;
   width: 100%;
 }
@@ -145,21 +145,21 @@ body {
   margin-bottom: 0.5em;
 }
 .weather-panel-temperature {
-  font-size: 5rem;
+  font-size: 3rem;
   margin-bottom: 0.1em;
 }
 .weather-panel-img {
   margin: 1em;
 }
 .weather-panel-img-pic {
-  height: 6em;
+  height: 4em;
 }
 .weather-panel-sun {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 1em;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   width: 100%;
   height: 100%;
 }
@@ -181,6 +181,30 @@ body {
 }
 .weather-panel-sun-set-icon {
   margin-right: 0.5em;
+}
+.weather-panel-forecast {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+}
+.weather-panel-forecast-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 0.5em;
+}
+.weather-panel-forecast-info-hour {
+  margin-bottom: 0.5em;
+  font-size: 0.7em;
+}
+.weather-panel-forecast-info-temp {
+  margin-bottom: 0.5em;
+  font-size: 1em;
+}
+.weather-panel-forecast-info-img-pic {
+  height: 1.5em;
 }
 
 .active {
@@ -266,13 +290,13 @@ body {
     margin-bottom: 1em;
   }
   .weather-panel-temperature {
-    font-size: 7rem;
+    font-size: 4rem;
   }
   .weather-panel-search-input {
     font-size: 1.6rem;
   }
   .weather-panel-img-pic {
-    height: 8em;
+    height: 5em;
   }
   .weather-add-heading {
     font-size: 1.6rem;
