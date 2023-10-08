@@ -47,7 +47,7 @@ WeatherApp was written in english language.
      <img src="./img/weatherApp3.PNG" width= "100%" height= "100%" alt="Screen Shot">
      </p>
 
-## JavaScript properties and methods:
+## JavaScript properties and methods
 
 ### In this project I did cover Web API and the following inbuilt JavaScript properties and methods
 - RESTful API
