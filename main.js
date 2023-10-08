@@ -341,7 +341,7 @@ const toggleAction = () => {
 		root.style.setProperty('--error-color', '#9dbebb')
 	} else if (toggleBtn.classList.contains('non-active')) {
 		root.style.setProperty('--background-color', '#f6f2e9')
-		root.style.setProperty('--app-color', '#f4e9cd')
+		root.style.setProperty('--app-color', '#fff')
 		root.style.setProperty('--main-color', '#000')
 		root.style.setProperty('--box-shadow', '#808080')
 		root.style.setProperty('--error-color', '#593333')
