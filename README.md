@@ -1,6 +1,16 @@
 <img src="./img/weatherApp1.PNG" width= "100%" height= "700" alt="Screen Shot">
 
-## WeatherApp
+# WeatherApp
+
+## Table of contents
+
+* [General info](#general-info)
+* [Technologies](#technologies)
+* [Screenshots](#Screenshots)
+* [JavaScript properties and methods](#JavaScript-properties-methods)
+* [Live](#live)
+
+## General info
 
 A weather application based on API from <a href="https://openweathermap.org/api">OpenWeather</a>.
 
@@ -10,13 +20,13 @@ This app has two modes (dark and light). Switch between those two and choose the
 
 WeatherApp was written in english language.
 
-## Tech used
+## Technologies
 
 <p align="left">
-<a href="https://developer.mozilla.org/en-US/docs/Web/HTML?retiredLocale=pl"><img src="dist/img/html5_icon.svg" style="width:32px; height:32px;" alt="HTML icon"></a>
-<a href="https://developer.mozilla.org/en-US/docs/Web/CSS?retiredLocale=pl"><img src="dist/img/css3_icon.svg" style="width:32px; height:32px;" alt="Css icon"></a>
-<a href="https://sass-lang.com/"><img src="dist/img/sass_icon.svg" style="width:32px; height:32px;"alt="Sass icon"></a>
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img src="dist/img/js_icon.svg" style="width:32px; height:32px;" alt="JS icon"></a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTML?retiredLocale=pl"><img src="./img/html5_icon.svg" style="width:32px; height:32px;" alt="HTML icon"></a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS?retiredLocale=pl"><img src="./img/css3_icon.svg" style="width:32px; height:32px;" alt="Css icon"></a>
+<a href="https://sass-lang.com/"><img src="./img/sass_icon.svg" style="width:32px; height:32px;"alt="Sass icon"></a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img src="./img/js_icon.svg" style="width:32px; height:32px;" alt="JS icon"></a>
 
 - HTML
 - CSS
@@ -37,8 +47,9 @@ WeatherApp was written in english language.
      <img src="./img/weatherApp3.PNG" width= "100%" height= "100%" alt="Screen Shot">
      </p>
 
-## In this project I did cover Web API and the following inbuilt JavaScript properties and methods:
+## JavaScript properties and methods:
 
+### In this project I did cover Web API and the following inbuilt JavaScript properties and methods
 - RESTful API
 - fetch()
 - Object.assign()
