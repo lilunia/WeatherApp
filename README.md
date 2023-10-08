@@ -1,4 +1,4 @@
-<img src="./img/weatherApp1.PNG" width= "100%" height= "700" alt="Screen Shot">
+<img src="./img/weatherApp1.PNG" width= "100%" height= "400" alt="Screen Shot">
 
 ## WeatherApp
 
@@ -29,12 +29,12 @@ WeatherApp was written in english language.
 
 - light mode
      <p align="center">
-     <img src="./img/weatherApp2.PNG" width= "500" height= "700" alt="Screen Shot">
+     <img src="./img/weatherApp2.PNG" width= "100%" height= "700" alt="Screen Shot">
      </p>
 
 - dark mode
      <p align="center">
-     <img src="./img/weatherApp3.PNG" width= "500" height= "700" alt="Screen Shot">
+     <img src="./img/weatherApp3.PNG" width= "100%" height= "700" alt="Screen Shot">
      </p>
 
 ## In this project I did cover Web API and the following inbuilt JavaScript properties and methods:
