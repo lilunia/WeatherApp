@@ -1,3 +1,5 @@
+<img src="./img/weatherApp1.PNG" width= "100%" height= "700" alt="Screen Shot">
+
 ## WeatherApp
 
 A weather application based on API from <a href="https://openweathermap.org/api">OpenWeather</a>.
@@ -26,17 +28,14 @@ WeatherApp was written in english language.
 ## Screenshots
 
 - light mode
-  <p align="center">
-  <img src="./img/weatherApp1.PNG.PNG" alt="Screen Shot">
-  </p>
-  <p align="center">
-  <img src="./img/weatherApp2.PNG" alt="Screen Shot">
-  </p>
+     <p align="center">
+     <img src="./img/weatherApp2.PNG" width= "500" height= "700" alt="Screen Shot">
+     </p>
 
 - dark mode
-  <p align="center">
-  <img src="./img/weatherApp3.PNG" alt="Screen Shot">
-  </p>
+     <p align="center">
+     <img src="./img/weatherApp3.PNG" width= "500" height= "700" alt="Screen Shot">
+     </p>
 
 ## In this project I did cover Web API and the following inbuilt JavaScript properties and methods:
 
