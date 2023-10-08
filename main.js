@@ -25,8 +25,7 @@ let timeZoneUser
 let timeDifference
 let sunrise
 let sunset
-let momentCurrent
-let momentWeather
+let moment
 let pathImg
 let momentForecast
 let forecastTime
@@ -79,8 +78,8 @@ const getWeather = () => {
 			<p class="weather-add-pressure">${press}hPa</p>`
 
 			checkSunMoment(timeCity, sunrise, sunset)
-			momentWeather = momentCurrent
-			checkStatus(info.description, info.id, momentWeather)
+			// momentWeather = momentCurrent
+			checkStatus(info.description, info.id)
 			img.setAttribute('src', `${pathImg}`)
 			setTime()
 			setInterval(setTime, 1000)
@@ -132,8 +131,7 @@ const getForecast = () => {
 				setTimeForecast(el.dt)
 
 				checkSunMoment(el.dt, sunrise, sunset)
-				momentForecast = momentCurrent
-				checkStatus(weaInfo, weaId, momentForecast)
+				checkStatus(weaInfo, weaId)
 
 				forecastPanelHour = document.createElement('div')
 				forecastPanelHour.classList.add('weather-panel-forecast-info')
@@ -163,7 +161,7 @@ const setTimeForecast = dtime => {
 	forecastTime = `${hrCheck}${ampmForecast}`
 }
 
-const checkStatus = (info, id, moment) => {
+const checkStatus = (info, id) => {
 	if (info === 'thunderstorm' || (id >= 200 && id < 300)) {
 		if (moment === 'day') {
 			pathImg = './img/thunderstorm_d.png'
@@ -306,14 +304,10 @@ const sunInfo = (rise, set) => {
 }
 
 const checkSunMoment = (timeCity, sunrise, sunset) => {
-	if (
-		(timeCity > sunrise && timeCity < sunset) ||
-		(timeCity > sunrise + 86400 && timeCity < sunset + 86400) ||
-		(timeCity > sunrise - 86400 && timeCity < sunset - 86400)
-	) {
-		momentCurrent = 'day'
+	if (timeCity > sunrise && timeCity < sunset) {
+		moment = 'day'
 	} else {
-		momentCurrent = 'night'
+		moment = 'night'
 	}
 }
 
