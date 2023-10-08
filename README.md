@@ -6,8 +6,8 @@
 
 * [General info](#general-info)
 * [Technologies](#technologies)
-* [Screenshots](#Screenshots)
-* [JavaScript properties and methods](#JavaScript-properties-methods)
+* [Screenshots](#screenshots)
+* [JavaScript properties and methods](#javaScript-properties-and-methods)
 * [Live](#live)
 
 ## General info
