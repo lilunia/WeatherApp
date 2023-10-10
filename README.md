@@ -18,7 +18,7 @@ The application provides information not only about the current weather in a giv
 
 This app has two modes (dark and light). Switch between those two and choose the version you prefer.
 
-WeatherApp was written in english language.
+WeatherApp was written in english language. Own project.
 
 ## Technologies
 
