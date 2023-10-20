@@ -42,13 +42,7 @@ const getWeather = () => {
 	const URL = API_LINK + city + API_KEY + API_UNITS
 
 	fetch(URL)
-		.then(res => {
-			if (res.ok) {
-				return res.json()
-			} else {
-				reject(`error data`)
-			}
-		})
+		.then(res => res.json())
 		.then(res => {
 			console.log(res)
 			const temp = res.main.temp
@@ -89,8 +83,7 @@ const getWeather = () => {
 			error.textContent = ''
 			dateInfo.textContent = ''
 		})
-		.catch(() => {
-			error => console.error(error)
+		.catch(error => {
 			error.textContent = 'Enter a correct name'
 		})
 }
@@ -99,13 +92,7 @@ const getForecast = () => {
 	const URL = API_FORECAST + city + API_KEY + API_UNITS
 
 	fetch(URL)
-		.then(res => {
-			if (res.ok) {
-				return res.json()
-			} else {
-				reject(`error data`)
-			}
-		})
+		.then(res => res.json())
 		.then(res => {
 			console.log(res)
 			forecastPanel.innerHTML = ''
@@ -343,8 +330,8 @@ const toggleAction = () => {
 }
 
 searchBtn.addEventListener('click', () => {
-	getForecast()
 	getWeather()
+	getForecast()
 })
 input.addEventListener('keyup', checkEnter)
 
