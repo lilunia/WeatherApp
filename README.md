@@ -75,6 +75,18 @@ WeatherApp was written in english language. Own project.
 - innerHTML
 - textContent
 
+## Installation
+
+To run this project, you must have the following dependencies installed:
+
+- Git (https://git-scm.com)
+
+```bash
+
+git clone https://github.com/lilunia/WeatherApp.git
+
+```
+
 ## Live
 
 <a href="lilunia.github.io/WeatherApp/">lilunia.github.io/WeatherApp/</a>
