@@ -1,3 +1,19 @@
+@keyframes toggleAnimDark {
+  from {
+    left: 50%;
+  }
+  to {
+    left: 100%;
+  }
+}
+@keyframes toggleAnimLight {
+  from {
+    left: 100%;
+  }
+  to {
+    left: 50%;
+  }
+}
 :root {
   --background-color: #f6f2e9;
   --app-color: #fff;
@@ -214,22 +230,6 @@ body {
   animation: toggleAnimLight 0.3s forwards;
 }
 
-@keyframes toggleAnimDark {
-  from {
-    left: 50%;
-  }
-  to {
-    left: 100%;
-  }
-}
-@keyframes toggleAnimLight {
-  from {
-    left: 100%;
-  }
-  to {
-    left: 50%;
-  }
-}
 .weather-add {
   display: flex;
   justify-content: center;

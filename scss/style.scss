@@ -1,3 +1,5 @@
+@import './animations';
+
 :root {
 	--background-color: #f6f2e9;
 	--app-color: #fff;
@@ -219,22 +221,6 @@ body {
 	animation: toggleAnimLight 0.3s forwards;
 }
 
-@keyframes toggleAnimDark {
-	from {
-		left: 50%;
-	}
-	to {
-		left: 100%;
-	}
-}
-@keyframes toggleAnimLight {
-	from {
-		left: 100%;
-	}
-	to {
-		left: 50%;
-	}
-}
 .weather-add {
 	display: flex;
 	justify-content: center;
@@ -277,41 +263,5 @@ body {
 		margin-bottom: 0.5em;
 	}
 }
-@media (min-width: 481px) and (min-height: 768px) {
-	.wrapper {
-		margin-top: auto;
-	}
-	.weather-panel {
-		font-size: 2rem;
-		&-main {
-			&-appname {
-				font-size: 1.8rem;
-			}
-		}
-		&-city {
-			font-size: 2.5rem;
-			margin-bottom: 1em;
-		}
-		&-temperature {
-			font-size: 4rem;
-		}
-		&-search {
-			&-input {
-				font-size: 1.6rem;
-			}
-		}
-		&-img {
-			&-pic {
-				height: 5em;
-			}
-		}
-	}
-	.weather-add {
-		&-heading {
-			font-size: 1.6rem;
-		}
-		&-box {
-			margin-bottom: 0.5em;
-		}
-	}
-}
+
+@import './media';

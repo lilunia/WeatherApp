@@ -1,0 +1,16 @@
+@keyframes toggleAnimDark {
+	from {
+		left: 50%;
+	}
+	to {
+		left: 100%;
+	}
+}
+@keyframes toggleAnimLight {
+	from {
+		left: 100%;
+	}
+	to {
+		left: 50%;
+	}
+}

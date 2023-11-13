@@ -1,0 +1,38 @@
+@media (min-width: 481px) and (min-height: 768px) {
+	.wrapper {
+		margin-top: auto;
+	}
+	.weather-panel {
+		font-size: 2rem;
+		&-main {
+			&-appname {
+				font-size: 1.8rem;
+			}
+		}
+		&-city {
+			font-size: 2.5rem;
+			margin-bottom: 1em;
+		}
+		&-temperature {
+			font-size: 4rem;
+		}
+		&-search {
+			&-input {
+				font-size: 1.6rem;
+			}
+		}
+		&-img {
+			&-pic {
+				height: 5em;
+			}
+		}
+	}
+	.weather-add {
+		&-heading {
+			font-size: 1.6rem;
+		}
+		&-box {
+			margin-bottom: 0.5em;
+		}
+	}
+}
