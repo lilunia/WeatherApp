@@ -1,12 +1,13 @@
 @media (min-width: 481px) and (min-height: 768px) {
 	.wrapper {
 		margin-top: auto;
+		height: 700px;
 	}
 	.weather-panel {
 		font-size: 2rem;
 		&-main {
 			&-appname {
-				font-size: 1.8rem;
+				font-size: 1.75rem;
 			}
 		}
 		&-city {
@@ -18,7 +19,7 @@
 		}
 		&-search {
 			&-input {
-				font-size: 1.6rem;
+				font-size: 1.75rem;
 			}
 		}
 		&-img {
@@ -28,8 +29,9 @@
 		}
 	}
 	.weather-add {
+		font-size: 2rem;
 		&-heading {
-			font-size: 1.6rem;
+			font-size: 1.75rem;
 		}
 		&-box {
 			margin-bottom: 0.5em;

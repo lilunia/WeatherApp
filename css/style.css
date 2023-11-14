@@ -37,7 +37,6 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 100%;
   height: 100vh;
   font-family: "Barlow", sans-serif;
   background-color: var(--background-color);
@@ -51,8 +50,8 @@ body {
   justify-content: center;
   align-items: center;
   margin: 0 0.25em;
-  height: 0.8em;
-  width: 0.8em;
+  height: 0.75em;
+  width: 0.75em;
 }
 
 .wrapper {
@@ -61,9 +60,7 @@ body {
   padding: 1em;
   width: 90%;
   max-width: 400px;
-  min-height: 550px;
-  height: 700px;
-  max-height: 700px;
+  height: 550px;
   font-size: 3rem;
   color: var(--main-color);
   background-color: var(--app-color);
@@ -89,12 +86,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: start;
-  flex-direction: row;
   width: 100%;
 }
 .weather-panel-main-appname {
-  display: flex;
-  justify-content: center;
   font-size: 1.5rem;
 }
 .weather-panel-main-toggle {
@@ -105,12 +99,11 @@ body {
 }
 .weather-panel-main-toggle-btn {
   position: relative;
-  padding: 0.1em 2em;
+  padding: 0.125em 2em;
   width: 1em;
   height: 1.5em;
   background: none;
-  border: none;
-  border: 0.1em solid var(--main-color);
+  border: 0.125em solid var(--main-color);
   border-radius: 1em;
   cursor: pointer;
 }
@@ -131,35 +124,32 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 0.5em;
-  padding-top: 1em;
+  margin-top: 0.5em;
   width: 100%;
 }
 .weather-panel-search-input {
-  width: 70%;
+  font-size: 1.5rem;
   color: var(--main-color);
-  font-size: 1.4rem;
   background: none;
   border: none;
 }
 .weather-panel-btn {
-  border: none;
-  background: none;
-  color: var(--main-color);
-  cursor: pointer;
   padding: 1em;
+  color: var(--main-color);
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 .weather-panel-dateTime {
-  font-size: 1.5rem;
   margin-bottom: 0.5em;
+  font-size: 1.5rem;
 }
 .weather-panel-city {
-  font-size: 2rem;
   margin-bottom: 0.5em;
+  font-size: 2rem;
 }
 .weather-panel-temperature {
   font-size: 3rem;
-  margin-bottom: 0.1em;
 }
 .weather-panel-img {
   margin: 1em;
@@ -172,28 +162,23 @@ body {
   justify-content: center;
   align-items: center;
   margin-bottom: 1em;
-  font-size: 1.3rem;
   width: 100%;
   height: 100%;
+  font-size: 1.25rem;
+}
+.weather-panel-sun-rise, .weather-panel-sun-set {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.weather-panel-sun-rise-icon, .weather-panel-sun-set-icon {
+  margin-right: 0.5em;
 }
 .weather-panel-sun-rise {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin-right: 1em;
 }
-.weather-panel-sun-rise-icon {
-  margin-right: 0.5em;
-}
 .weather-panel-sun-set {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  display: flex;
   margin-left: 1em;
-}
-.weather-panel-sun-set-icon {
-  margin-right: 0.5em;
 }
 .weather-panel-forecast {
   display: flex;
@@ -202,15 +187,12 @@ body {
   margin-bottom: 1em;
 }
 .weather-panel-forecast-info {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  text-align: center;
   margin: 0 0.5em;
 }
 .weather-panel-forecast-info-hour {
   margin-bottom: 0.5em;
-  font-size: 0.7em;
+  font-size: 0.75em;
 }
 .weather-panel-forecast-info-temp {
   margin-bottom: 0.5em;
@@ -231,23 +213,19 @@ body {
 }
 
 .weather-add {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   width: 100%;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 .weather-add-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 0.25em;
   width: 100%;
   height: 1em;
-  margin-bottom: 0.2em;
 }
 .weather-add-heading {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
 }
 
 .footer {
@@ -255,13 +233,13 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: auto;
-  padding: 1em;
   bottom: 0;
   left: 0;
+  margin-top: auto;
+  padding: 1em;
   width: 100%;
   height: 5em;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   color: var(--main-color);
   background-color: var(--app-color);
 }
@@ -275,12 +253,13 @@ body {
 @media (min-width: 481px) and (min-height: 768px) {
   .wrapper {
     margin-top: auto;
+    height: 700px;
   }
   .weather-panel {
     font-size: 2rem;
   }
   .weather-panel-main-appname {
-    font-size: 1.8rem;
+    font-size: 1.75rem;
   }
   .weather-panel-city {
     font-size: 2.5rem;
@@ -290,13 +269,16 @@ body {
     font-size: 4rem;
   }
   .weather-panel-search-input {
-    font-size: 1.6rem;
+    font-size: 1.75rem;
   }
   .weather-panel-img-pic {
     height: 5em;
   }
+  .weather-add {
+    font-size: 2rem;
+  }
   .weather-add-heading {
-    font-size: 1.6rem;
+    font-size: 1.75rem;
   }
   .weather-add-box {
     margin-bottom: 0.5em;

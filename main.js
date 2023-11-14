@@ -23,13 +23,14 @@ let root = document.documentElement
 let timeZoneCity
 let timeZoneUser
 let timeDifference
-let sunrise, sunset
+let sunrise
+let sunset
 let moment
 let pathImg
 let momentForecast
 let forecastTime
 let forecastPanelHour
-let hoursLocal, ampmCheck, hrCheck, minCheck
+let countTime
 
 const API_LINK = 'https://api.openweathermap.org/data/2.5/weather?q='
 const API_KEY = '&appid=4cc99631ba4cc9ac44c94bfa9d16e0f7'
@@ -40,11 +41,11 @@ const API_FORECAST = 'https://api.openweathermap.org/data/2.5/forecast?q='
 const getWeather = () => {
 	const city = input.value || 'Warsaw'
 	const URL = API_LINK + city + API_KEY + API_UNITS
+	clearInterval(countTime)
 
 	fetch(URL)
 		.then(res => res.json())
 		.then(res => {
-			console.log(res)
 			const temp = res.main.temp
 			const hum = res.main.humidity
 			const press = res.main.pressure
@@ -75,12 +76,9 @@ const getWeather = () => {
 			checkStatus(info.description, info.id)
 			img.setAttribute('src', `${pathImg}`)
 			setTime()
-			setInterval(setTime, 1000)
 			sunInfo(sunrise, sunset)
-
 			input.value = ''
 			error.textContent = ''
-			dateInfo.textContent = ''
 		})
 		.catch(error => {
 			error.textContent = 'Enter a correct name'
@@ -93,7 +91,6 @@ const getForecast = () => {
 	fetch(URL)
 		.then(res => res.json())
 		.then(res => {
-			console.log(res)
 			forecastPanel.innerHTML = ''
 			const weatherArr = new Array()
 			const info3h = Object.assign({}, res.list[0])
@@ -132,8 +129,34 @@ const getForecast = () => {
 		})
 		.catch(() => {
 			error => console.error(error)
-			error.textContent = 'Enter a correct forecast name'
+			error.textContent = 'Enter a correct name'
+			clearStuff()
 		})
+}
+const clearStuff = () => {
+	input.value = ''
+	dateInfo.textContent = ''
+	weather.innerHTML = ''
+	humidity.innerHTML = ''
+	wind.innerHTML = ''
+	pressure.innerHTML = ''
+	sunriseInfo.innerHTML = ''
+	sunsetInfo.innerHTML = ''
+	cityName.textContent = ''
+	temperature.textContent = ''
+	forecastPanelHour = ''
+	img.setAttribute('src', './img/unknown.png')
+}
+const setTimeForecast = dtime => {
+	const time = new Date(dtime * 1000)
+	const hourForecast = time.getHours()
+
+	const hourLocalForecast = Math.abs(hourForecast + timeDifference + 24) % 24
+	const hourAmpm = hourLocalForecast % 12 || 12
+	const hrCheck = hourAmpm < 10 ? `0${hourAmpm}` : `${hourAmpm}`
+	const ampmForecast = hourLocalForecast >= 12 ? 'pm' : 'am'
+
+	forecastTime = `${hrCheck} ${ampmForecast}`
 }
 
 const checkStatus = (info, id) => {
@@ -195,46 +218,36 @@ const checkStatus = (info, id) => {
 		pathImg = './img/unknown.png'
 	}
 }
-const calculateLocalTime = time => {
-	const hours = time.getHours()
-	const hoursAmpm = hoursLocal % 12 || 12
-	const minutes = time.getMinutes()
 
-	hoursLocal = Math.abs(hours + timeDifference + 24) % 24
-	hrCheck = hoursAmpm < 10 ? `0${hoursAmpm}` : `${hoursAmpm}`
-	ampmCheck = hoursLocal % 24 >= 12 ? 'pm' : 'am'
-	minCheck = minutes < 10 ? `0${minutes}` : `${minutes}`
-}
 const setTime = () => {
 	const time = new Date()
-	const day = time.getDate()
-	const month = time.getMonth()
-	const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-	const curMonth = monthNames[month]
-	let currDay
-
 	timeZoneUser = time.getTimezoneOffset() * 60
 	timeDifference = (timeZoneCity + timeZoneUser) / 3600
 
-	if (hoursLocal > 24) {
-		currDay = day + 1
-	} else if (hoursLocal < 0) {
-		currDay = day - 1
-	} else {
-		currDay = day
-	}
+	countTime = setInterval(() => {
+		const hours = time.getHours()
+		const hoursLocal = hours + timeDifference
+		const hoursAmpm = hoursLocal % 12 || 12
+		const hrCheck = hoursAmpm < 10 ? `0${hoursAmpm}` : `${hoursAmpm}`
+		const ampmCheck = hoursLocal % 24 >= 12 ? 'pm' : 'am'
+		const minutes = time.getMinutes()
+		const minCheck = minutes < 10 ? `0${minutes}` : `${minutes}`
 
-	calculateLocalTime(time)
-	console.log(`${ampmCheck} inside setTime`)
+		const day = time.getDate()
+		const month = time.getMonth()
+		const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+		const curMonth = monthNames[month]
 
-	dateInfo.textContent = `${curMonth} ${currDay}, ${hrCheck}:${minCheck}${ampmCheck}`
-}
-const setTimeForecast = dtime => {
-	const time = new Date(dtime * 1000)
-	calculateLocalTime(time)
-	const ampmForecast = hoursLocal >= 12 ? 'pm' : 'am'
-
-	forecastTime = `${hrCheck}${ampmForecast}`
+		let currDay
+		if (hoursLocal >= 24) {
+			currDay = day + 1
+		} else if (hoursLocal < 0) {
+			currDay = day - 1
+		} else {
+			currDay = day
+		}
+		dateInfo.textContent = `${curMonth} ${currDay}, ${hrCheck}:${minCheck} ${ampmCheck}`
+	}, 1000)
 }
 
 const sunInfo = (rise, set) => {
@@ -243,8 +256,21 @@ const sunInfo = (rise, set) => {
 	const dateRise = new Date(riseTimestamp * 1000) // The Date() constructor takes a timestamp in milliseconds
 	const dateSet = new Date(setTimestamp * 1000)
 
-	calculateLocalTime(dateRise)
-	calculateLocalTime(dateSet)
+	const hourRise = dateRise.getHours()
+	const hoursLocalRise = Math.abs(hourRise + timeDifference + 24) % 24
+	const hoursAmpm = hoursLocalRise % 12 || 12
+	const hrCheck = hoursAmpm < 10 ? `0${hoursAmpm}` : `${hoursAmpm}`
+	const ampmRise = hoursLocalRise >= 12 ? 'pm' : 'am'
+	const minutesRise = dateRise.getMinutes()
+	const minCheckRise = minutesRise < 10 ? `0${minutesRise}` : `${minutesRise}`
+
+	const hourSet = dateSet.getHours()
+	const hoursLocalSet = Math.abs(hourSet + timeDifference + 24) % 24
+	const hoursAmpmSet = hoursLocalSet % 12 || 12
+	const hrCheckSet = hoursAmpmSet < 10 ? `0${hoursAmpmSet}` : `${hoursAmpmSet}`
+	const ampmSet = hoursLocalSet >= 12 ? 'pm' : 'am'
+	const minutesSet = dateSet.getMinutes()
+	const minCheckSet = minutesSet < 10 ? `0${minutesSet}` : `${minutesSet}`
 
 	sunriseInfo.innerHTML = `<span class="weather-panel-sun-rise-icon"><svg
 		xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -258,7 +284,7 @@ const sunInfo = (rise, set) => {
 		<line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
 		<line x1="23" y1="22" x2="1" y2="22"></line>
 		<polyline points="8 6 12 2 16 6"></polyline>
-		</svg></span><span class="weather-panel-sun-rise-info">${hrCheck}:${minCheck}${ampmCheck}</span>`
+		</svg></span><span class="weather-panel-sun-rise-info">${hrCheck}:${minCheckRise} ${ampmRise}</span>`
 
 	sunsetInfo.innerHTML = `<span class="weather-panel-sun-set-icon"><svg
 		xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -272,7 +298,7 @@ const sunInfo = (rise, set) => {
 		<line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
 		<line x1="23" y1="22" x2="1" y2="22"></line>
 		<polyline points="16 5 12 9 8 5"></polyline>
-		</svg></span><span class="weather-panel-sun-set-info">${hrCheck}:${minCheck}${ampmCheck}</span>`
+		</svg></span><span class="weather-panel-sun-set-info">${hrCheckSet}:${minCheckSet} ${ampmSet}</span>`
 }
 
 const checkSunMoment = (timeCity, sunrise, sunset) => {
@@ -280,13 +306,6 @@ const checkSunMoment = (timeCity, sunrise, sunset) => {
 		moment = 'day'
 	} else {
 		moment = 'night'
-	}
-}
-
-const checkEnter = e => {
-	if (e.key === 'Enter') {
-		getForecast()
-		getWeather()
 	}
 }
 
@@ -313,11 +332,18 @@ const toggleAction = () => {
 		root.style.setProperty('--error-color', '#593333')
 	}
 }
+const checkEnter = e => {
+	if (e.key === 'Enter') {
+		getWeather()
+		getForecast()
+	}
+}
 
 searchBtn.addEventListener('click', () => {
 	getWeather()
 	getForecast()
 })
+
 input.addEventListener('keyup', checkEnter)
 
 toggleSlider.addEventListener('click', () => {
