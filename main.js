@@ -51,11 +51,12 @@ const getWeather = () => {
 			const info = Object.assign({}, ...res.weather)
 			const wea = info.description
 			const timeCity = res.dt
+
 			timeZoneCity = res.timezone
 			sunrise = res.sys.sunrise
 			sunset = res.sys.sunset
 
-			cityName.textContent = res.name
+			cityName.textContent = res.name + ', ' + res.sys.country
 			temperature.textContent = Math.floor(temp) + '°C'
 
 			weather.innerHTML = `<p class="weather-add-heading">Weather</p>
@@ -217,6 +218,7 @@ const setTime = () => {
 	timeDifference = (timeZoneCity + timeZoneUser) / 3600
 
 	countTime = setInterval(() => {
+		const time = new Date()
 		calculateLocalTime(time)
 		let currDay, currdayWeek
 		const day = time.getDate()
@@ -242,11 +244,24 @@ const setTime = () => {
 }
 
 const calculateLocalTime = time => {
-	const hours = time.getHours()
+	const timeDiff = timeDifference.toString().slice(-2)
+	let hours = time.getHours()
 	localTime = hours + timeDifference
 	const hoursLocal = Math.abs(hours + timeDifference + 24) % 24
-	const hoursAmpm = hoursLocal % 12 || 12
-	const minutes = time.getMinutes()
+	let hoursAmpm = hoursLocal % 12 || 12
+	let minutes = time.getMinutes()
+
+	if (timeDiff === '.5') {
+		minutes = minutes + 30
+		hoursAmpm = parseInt(hoursAmpm.toString().slice(0, -1))
+	} else if (timeDiff === '75') {
+		minutes = minutes + 45
+		hoursAmpm = parseInt(hoursAmpm.toString().slice(0, -2))
+	}
+	if (minutes > 60) {
+		hoursAmpm++
+		minutes = minutes - 60
+	}
 
 	hrCheck = hoursAmpm < 10 ? `0${hoursAmpm}` : `${hoursAmpm}`
 	minCheck = minutes < 10 ? `0${minutes}` : `${minutes}`
