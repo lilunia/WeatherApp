@@ -8,7 +8,6 @@ const img = document.querySelector('.weather-panel-img-pic')
 const sunriseInfo = document.querySelector('.weather-panel-sun-rise')
 const sunsetInfo = document.querySelector('.weather-panel-sun-set')
 const forecastPanel = document.querySelector('.weather-panel-forecast')
-
 const forecastImg = document.getElementsByClassName('weather-panel-forecast-info-img-pic')
 
 const weather = document.querySelector('.weather-add-box-weather')

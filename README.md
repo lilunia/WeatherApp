@@ -12,13 +12,13 @@
 
 ## General info
 
-A weather application based on API from <a href="https://openweathermap.org/api">OpenWeather</a>.
+A weather application based on <a href="https://openweathermap.org/api">the OpenWeather</a> API.
 
-The application provides information not only about the current weather in a given city in the world but also the local time and sunrise and sunset times. With this application you can check the current weather in a given city and 12 hour forecast with a 3-hour step.
+The application provides information not only about the current weather in a given city in the world, but also the local time and sunrise and sunset times. With this application you can check the current weather in a given city and the 12 hour forecast with 3 hour increments.
 
-This app has two modes (dark and light). Switch between those two and choose the version you prefer.
+This application has two modes (dark and light). You can switch between them and choose the one you prefer.
 
-WeatherApp was written in english language. Own project.
+WeatherApp is written in English language. Own project.
 
 ## Technologies
 
