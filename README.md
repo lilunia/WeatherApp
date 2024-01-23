@@ -1,4 +1,4 @@
-<img src="./img/weatherApp1.PNG" width= "100%" height= "700" alt="Screen Shot">
+<img src="./img/weatherApp1.PNG" width= "100%" height= "100%" alt="Screen Shot">
 
 # WeatherApp
 
